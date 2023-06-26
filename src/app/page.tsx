@@ -4,7 +4,24 @@
 import Paper from '@mui/material/Paper';
 // import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import { Button } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
+import AllRunsList from './components/AllRunsList';
+
+
+export default function Home() {
+    
+  return (
+    <>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid item xs={6}>
+          <Item>
+            <AllRunsList />
+          </Item>
+        </Grid>
+      </Grid>
+    </>
+  )
+};
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -13,22 +30,3 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
-
-export default function Home() {
-  
-  //getting data from localHost Python flask
-  const getAllRuns = async () => {
-    const url = new URL("http://127.0.0.1:5000/allRuns");
-    
-    const response = await fetch(url.toString());
-    const data = await response.json();
-    return data;
-  }
-  
-  return (
-    <>
-      <Button variant="contained" onClick={() => {getAllRuns()}}>GET DATA</Button>
-      Hello world!
-    </>
-  )
-}
