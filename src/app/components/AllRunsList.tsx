@@ -1,5 +1,16 @@
 'use client';
-import { Typography, Button, ListItem, ListItemText, TableCell, TableRow, TableContainer, Table, TableHead, TableBody } from "@mui/material";
+import { Typography,
+  Button,
+  ListItem,
+  ListItemText,
+  TableCell,
+  TableRow,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody, 
+} from "@mui/material";
+import { makeStyles } from "@mui/material";
 import { useState } from "react";
 
 const AllRunsList = () => {
@@ -26,6 +37,8 @@ const AllRunsList = () => {
         <TableCell component="th" scope="row">
           {item['Distance']}
         </TableCell>
+        <TableCell>{item['Elapsed Time']}</TableCell>
+        <TableCell>{item['Date']}</TableCell>
       </TableRow>
     )
 
@@ -37,10 +50,12 @@ const AllRunsList = () => {
       <Button variant="contained" onClick={() => {getAllRuns()}}>GET DATA</Button>
       
       <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="All Runs Table" >
+        <Table sx={{ minWidth: 650 }} aria-label="All Runs Table" className={ClassNames.table} >
           <TableHead>
             <TableRow>
               <TableCell>Distance</TableCell>
+              <TableCell>Time</TableCell>
+              <TableCell>Date</TableCell>
             </TableRow>
           </TableHead>
           
@@ -57,3 +72,9 @@ const AllRunsList = () => {
 }
 
 export default AllRunsList;
+
+const useStyles = makeStyles({
+  table: {
+    overflowY: 'auto'
+  }
+})
