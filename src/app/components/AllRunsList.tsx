@@ -8,7 +8,8 @@ import { Typography,
   TableContainer,
   Table,
   TableHead,
-  TableBody, 
+  TableBody,
+  Stack, 
 } from "@mui/material";
 import { makeStyles } from "@mui/material";
 import { useState } from "react";
@@ -46,11 +47,13 @@ const AllRunsList = () => {
   
   return (
     <>
-      <Typography variant="h4">All Runs</Typography>
-      <Button variant="contained" onClick={() => {getAllRuns()}}>GET DATA</Button>
+      <Stack direction="row" spacing={3}>
+        <Typography variant="h4">All Runs</Typography>
+        <Button variant="contained" onClick={() => {getAllRuns()}}>GET DATA</Button>        
+      </Stack>
       
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="All Runs Table" className={ClassNames.table} >
+      <TableContainer style={{ maxHeight: 350 }}>
+        <Table  size="small" aria-label="All Runs Table" style={{ width: '100%' }} >
           <TableHead>
             <TableRow>
               <TableCell>Distance</TableCell>
@@ -73,8 +76,3 @@ const AllRunsList = () => {
 
 export default AllRunsList;
 
-const useStyles = makeStyles({
-  table: {
-    overflowY: 'auto'
-  }
-})

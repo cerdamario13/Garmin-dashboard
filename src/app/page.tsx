@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <Item>
             <AllRunsList />
           </Item>
