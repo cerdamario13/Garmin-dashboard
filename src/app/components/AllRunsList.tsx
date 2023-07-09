@@ -11,7 +11,6 @@ import { Typography,
   TableBody,
   Stack, 
 } from "@mui/material";
-import { makeStyles } from "@mui/material";
 import { useState } from "react";
 
 const AllRunsList = () => {
@@ -24,12 +23,12 @@ const AllRunsList = () => {
     
     const response = await fetch(url.toString());
     const data = await response.json();
-    console.log(data['data']);
+    console.log(data);
     setAllRuns(data['data'])
   }
   
   //mapping all runs
-  const runList = allRuns.map((item, idx) => {
+  const runList = allRuns.map((item, _) => {
     return(
       <TableRow
         key={item['Date']}
@@ -49,7 +48,7 @@ const AllRunsList = () => {
     <>
       <Stack direction="row" spacing={3}>
         <Typography variant="h4">All Runs</Typography>
-        <Button variant="contained" onClick={() => {getAllRuns()}}>GET DATA</Button>        
+        <Button variant="outlined" onClick={() => {getAllRuns()}}>GET DATA</Button>        
       </Stack>
       
       <TableContainer style={{ maxHeight: 350 }}>
