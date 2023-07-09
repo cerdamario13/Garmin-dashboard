@@ -6,6 +6,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import { Button, Grid, Typography } from '@mui/material';
 import AllRunsList from './components/AllRunsList';
+import Summaries from './components/Summaries';
 
 
 export default function Home() {
@@ -14,6 +15,11 @@ export default function Home() {
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={4}>
+          <Item>
+            <Summaries />
+          </Item>
+        </Grid>
+        <Grid item xs={8}>
           <Item>
             <AllRunsList />
           </Item>
