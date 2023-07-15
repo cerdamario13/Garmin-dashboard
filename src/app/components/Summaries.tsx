@@ -8,7 +8,7 @@ import {
   ListItemText,
   ListItemIcon
  } from '@mui/material'
- import { DirectionsRun } from "@mui/icons-material";
+ import { DirectionsRun, Whatshot } from "@mui/icons-material";
 import { useState } from 'react';
 
 
@@ -45,6 +45,12 @@ const Summaries = () => {
               <DirectionsRun />
             </ListItemIcon>
             <ListItemText primary={`Total Distance: ${summary['total_distance']} Miles`} />
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <Whatshot />
+            </ListItemIcon>
+            <ListItemText primary={`Total Calories ${summary['total_calories']} Cal`} />
           </ListItemButton>
         </List>
         
