@@ -2,20 +2,31 @@
 import { 
   Stack,
   Typography,
-  Button
+  Button,
+  List,
+  ListItemButton,
+  ListItemText,
+  ListItemIcon
  } from '@mui/material'
+ import { DirectionsRun } from "@mui/icons-material";
 import { useState } from 'react';
 
 
 const Summaries = () => {
-  const [summary, setSummary] = useState({});
+  const [summary, setSummary] = useState({
+    "total_distance": 0,
+    "total_calories": 0
+  });
   
   const getRunSummary = async () => {
     const url = new URL("http://127.0.0.1:5000/runSummaries");
     const response = await fetch(url.toString());
     const data = await response.json();
     console.log(data);
-    setSummary(data)
+    
+    const tempData = {...data};
+    setSummary(tempData);
+    
   }
   
   return (
@@ -27,6 +38,15 @@ const Summaries = () => {
           <Typography variant='h4'>Run Stats</Typography>
           <Button variant="outlined" onClick={() => {getRunSummary()}}>Get Summary</Button>
         </Stack>
+        
+        <List>
+          <ListItemButton>
+            <ListItemIcon>
+              <DirectionsRun />
+            </ListItemIcon>
+            <ListItemText primary={`Total Distance: ${summary['total_distance']} Miles`} />
+          </ListItemButton>
+        </List>
         
       </Stack>      
     </>
