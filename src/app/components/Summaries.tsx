@@ -10,6 +10,7 @@ import {
  } from '@mui/material'
  import { DirectionsRun, Whatshot } from "@mui/icons-material";
 import { useState } from 'react';
+import DistanceDialog from './DistanceDialog';
 
 
 const Summaries = () => {
@@ -17,6 +18,8 @@ const Summaries = () => {
     "total_distance": 0,
     "total_calories": 0
   });
+  const [openDistanceDialog, setDistanceDialog] = useState(false);
+  
   
   const getRunSummary = async () => {
     const url = new URL("http://127.0.0.1:5000/runSummaries");
@@ -26,8 +29,9 @@ const Summaries = () => {
     
     const tempData = {...data};
     setSummary(tempData);
-    
   }
+  
+  
   
   return (
     
@@ -40,13 +44,13 @@ const Summaries = () => {
         </Stack>
         
         <List>
-          <ListItemButton>
+          <ListItemButton onClick={() => {setDistanceDialog(true)}}>
             <ListItemIcon>
               <DirectionsRun />
             </ListItemIcon>
             <ListItemText primary={`Total Distance: ${summary['total_distance']} Miles`} />
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton >
             <ListItemIcon>
               <Whatshot />
             </ListItemIcon>
@@ -54,7 +58,14 @@ const Summaries = () => {
           </ListItemButton>
         </List>
         
-      </Stack>      
+      </Stack>
+      
+      <DistanceDialog
+        open={openDistanceDialog}
+        setOpen={setDistanceDialog}
+        distance={summary['total_distance']}
+      />
+      
     </>
     
   );
