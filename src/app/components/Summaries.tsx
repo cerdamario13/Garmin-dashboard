@@ -6,9 +6,10 @@ import {
   List,
   ListItemButton,
   ListItemText,
-  ListItemIcon
+  ListItemIcon,
+  ListItem
  } from '@mui/material'
- import { DirectionsRun, Whatshot } from "@mui/icons-material";
+ import { DirectionsRun, Whatshot, DirectionsBike, Pool } from "@mui/icons-material";
 import { useState } from 'react';
 import DistanceDialog from './DistanceDialog';
 
@@ -44,18 +45,49 @@ const Summaries = () => {
         </Stack>
         
         <List>
+          
           <ListItemButton onClick={() => {setDistanceDialog(true)}}>
             <ListItemIcon>
               <DirectionsRun />
             </ListItemIcon>
-            <ListItemText primary={`Total Distance: ${summary['total_distance']} Miles`} />
+            <ListItemText primary={`Run Distance: ${summary['total_distance']} Miles`} />
           </ListItemButton>
+          
           <ListItemButton >
             <ListItemIcon>
               <Whatshot />
             </ListItemIcon>
-            <ListItemText primary={`Total Calories ${summary['total_calories']} Cal`} />
+            <ListItemText primary={`Run Calories ${summary['total_calories']} Cal`} />
           </ListItemButton>
+          
+          <ListItemButton>
+            <ListItemIcon>
+              <DirectionsBike />
+            </ListItemIcon>
+            <ListItemText primary={`Bike Distance: Cal`}/>
+          </ListItemButton>
+          
+          <ListItemButton >
+            <ListItemIcon>
+              <Whatshot />
+            </ListItemIcon>
+            <ListItemText primary={`Bike Calories  Cal`} />
+          </ListItemButton>
+          
+          <ListItemButton>
+            <ListItemIcon>
+              <Pool />
+            </ListItemIcon>
+            <ListItemText primary={`Swim Distance: Cal`}/>
+          </ListItemButton>
+          
+          <ListItemButton >
+            <ListItemIcon>
+              <Whatshot />
+            </ListItemIcon>
+            <ListItemText primary={`Swim Calories  Cal`} />
+          </ListItemButton>
+          
         </List>
         
       </Stack>
