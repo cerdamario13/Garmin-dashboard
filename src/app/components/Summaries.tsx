@@ -15,10 +15,19 @@ import DistanceDialog from './DistanceDialog';
 
 
 const Summaries = () => {
-  const [summary, setSummary] = useState({
+  const [runSummary, setRunSummary] = useState({
     "total_distance": 0,
     "total_calories": 0
   });
+  const [bikeSummary, setBikeSummary] = useState({
+    total_distance: 0,
+    total_calories: 0,
+  });
+  const [swimSummary, setSwimSummary] = useState({
+    total_distance: 0,
+    total_calories: 0
+  })
+  
   const [openDistanceDialog, setDistanceDialog] = useState(false);
   
   
@@ -29,7 +38,9 @@ const Summaries = () => {
     console.log(data);
     
     const tempData = {...data};
-    setSummary(tempData);
+    setRunSummary(tempData['runs']);
+    setBikeSummary(tempData['bike_rides']);
+    setSwimSummary(tempData['swims']);
   }
   
   
@@ -50,42 +61,42 @@ const Summaries = () => {
             <ListItemIcon>
               <DirectionsRun />
             </ListItemIcon>
-            <ListItemText primary={`Run Distance: ${summary['total_distance']} Miles`} />
+            <ListItemText primary={`Run Distance: ${runSummary['total_distance']} Miles`} />
           </ListItemButton>
           
           <ListItemButton >
             <ListItemIcon>
               <Whatshot />
             </ListItemIcon>
-            <ListItemText primary={`Run Calories ${summary['total_calories']} Cal`} />
+            <ListItemText primary={`Run Calories ${runSummary['total_calories']} Cal`} />
           </ListItemButton>
           
           <ListItemButton>
             <ListItemIcon>
               <DirectionsBike />
             </ListItemIcon>
-            <ListItemText primary={`Bike Distance: Cal`}/>
+            <ListItemText primary={`Bike Distance: ${bikeSummary['total_distance']} Miles`}/>
           </ListItemButton>
           
           <ListItemButton >
             <ListItemIcon>
               <Whatshot />
             </ListItemIcon>
-            <ListItemText primary={`Bike Calories  Cal`} />
+            <ListItemText primary={`Bike Calories: ${bikeSummary['total_calories']} Cal`} />
           </ListItemButton>
           
           <ListItemButton>
             <ListItemIcon>
               <Pool />
             </ListItemIcon>
-            <ListItemText primary={`Swim Distance: Cal`}/>
+            <ListItemText primary={`Swim Distance: ${swimSummary['total_distance']} Meters`}/>
           </ListItemButton>
           
           <ListItemButton >
             <ListItemIcon>
               <Whatshot />
             </ListItemIcon>
-            <ListItemText primary={`Swim Calories  Cal`} />
+            <ListItemText primary={`Swim Calories: ${swimSummary['total_calories']}  Cal`} />
           </ListItemButton>
           
         </List>
@@ -95,7 +106,7 @@ const Summaries = () => {
       <DistanceDialog
         open={openDistanceDialog}
         setOpen={setDistanceDialog}
-        distance={summary['total_distance']}
+        distance={runSummary['total_distance']}
       />
       
     </>
