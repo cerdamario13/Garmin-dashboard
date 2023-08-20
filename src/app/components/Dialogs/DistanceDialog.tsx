@@ -24,14 +24,14 @@ const DistanceDialog: React.FunctionComponent<DistanceDialogProps> = (props) => 
   
   
   const milestoneList = milestoneData.map((item, idx) => (
-    <>
+    <DialogContent key={idx}>
       <Milestone
         key={idx}
         distance={props.distance}
         cities={Object.keys(item)[0]}
         distanceCities={Object.values(item)[0]}
       />
-    </>
+    </DialogContent>
   ))
   
   return (
@@ -43,12 +43,8 @@ const DistanceDialog: React.FunctionComponent<DistanceDialogProps> = (props) => 
       >
         <DialogTitle>Running Milestones</DialogTitle>
         
-        <DialogContent>
-          
           {milestoneList}
-          
-        </DialogContent>
-        
+                  
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
