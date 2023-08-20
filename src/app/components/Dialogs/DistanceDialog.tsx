@@ -27,21 +27,16 @@ const DistanceDialog: React.FunctionComponent<DistanceDialogProps> = (props) => 
     props.setOpen(false);
   };
   
-  function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
-    return (
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Box sx={{ width: '100%', mr: 1 }}>
-          <LinearProgress variant="determinate" {...props} />
-        </Box>
-        <Box sx={{ minWidth: 35 }}>
-          <Typography variant="body2" color="text.secondary">{`${Math.round(
-            props.value,
-          )}%`}</Typography>
-        </Box>
-      </Box>
-    );
-  }
   
+  const milestoneList = milestoneData.map((item, _) => (
+    <>
+      <Milestone
+        distance={props.distance}
+        cities={Object.keys(item)[0]}
+        distanceCities={Object.values(item)[0]}
+      />
+    </>
+  ))
   
   return (
     <>
@@ -51,16 +46,13 @@ const DistanceDialog: React.FunctionComponent<DistanceDialogProps> = (props) => 
         fullWidth={true}
       >
         <DialogTitle>Running Milestones</DialogTitle>
+        
         <DialogContent>
-          <LinearProgressWithLabel value={(props.distance / milestones['London to Paris'] * 100)} />
           
-          <Stack direction="row" spacing ={1}>
-            
-            <Typography variant="body1" >London to Paris</Typography>
-            <Typography variant="body1">{`${props.distance} - ${milestones['London to Paris']}`}</Typography>
-            
-          </Stack>
+          {milestoneList}
+          
         </DialogContent>
+        
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
@@ -73,8 +65,8 @@ const DistanceDialog: React.FunctionComponent<DistanceDialogProps> = (props) => 
 
 export default DistanceDialog;
 
-const milestones = {
-  'Rome to Florence': 174,
-  'Vancouver to Seattle': 140,
-  'London to Paris': 214
-}
+const milestoneData = [
+  {'Rome to Florence': 174},
+  {'Vancouver to Seattle': 140},
+  {'London to Paris': 214}
+]
