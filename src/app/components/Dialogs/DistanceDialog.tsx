@@ -1,16 +1,11 @@
 'use client'
 import { Dispatch, SetStateAction } from "react"
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  LinearProgress,
-  LinearProgressProps,
-  Typography,
-  Stack
 } from "@mui/material"
 import Milestone from "../ProgressIndicators/LinearProgress"
 
@@ -28,9 +23,10 @@ const DistanceDialog: React.FunctionComponent<DistanceDialogProps> = (props) => 
   };
   
   
-  const milestoneList = milestoneData.map((item, _) => (
+  const milestoneList = milestoneData.map((item, idx) => (
     <>
       <Milestone
+        key={idx}
         distance={props.distance}
         cities={Object.keys(item)[0]}
         distanceCities={Object.values(item)[0]}

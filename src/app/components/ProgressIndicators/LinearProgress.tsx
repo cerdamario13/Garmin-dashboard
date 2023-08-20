@@ -30,9 +30,19 @@ const Milestone: React.FunctionComponent<MilestoneProps> = (props) => {
     );
   }
   
+  //logic if the user distance is greater than the milestone
+  const distanceLogic = (userDistance: number, milestoneDistance: number) => {    
+    if (userDistance >= milestoneDistance) {
+      return 100;
+    } else {
+      return (userDistance / milestoneDistance) * 100;
+    }
+    
+  }
+  
   return (
     <>
-      <LinearProgressWithLabel value={(props.distance / props.distanceCities * 100)}  />
+      <LinearProgressWithLabel value={distanceLogic(props.distance, props.distanceCities)}  />
       <Stack direction="row" spacing={1}>
         
       <Typography variant="body1" >{props.cities}</Typography>
