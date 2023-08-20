@@ -11,7 +11,7 @@ import {
  } from '@mui/material'
  import { DirectionsRun, Whatshot, DirectionsBike, Pool } from "@mui/icons-material";
 import { useState } from 'react';
-import DistanceDialog from './DistanceDialog';
+import DistanceDialog from './Dialogs/DistanceDialog';
 
 
 const Summaries = () => {
@@ -51,7 +51,7 @@ const Summaries = () => {
       <Stack direction="column">
         
         <Stack direction="row" spacing={3}>
-          <Typography variant='h4'>Run Stats</Typography>
+          <Typography variant='h4'>Workout Stats</Typography>
           <Button variant="outlined" onClick={() => {getRunSummary()}}>Get Summary</Button>
         </Stack>
         

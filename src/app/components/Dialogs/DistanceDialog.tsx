@@ -9,7 +9,8 @@ import {
   DialogTitle,
   LinearProgress,
   LinearProgressProps,
-  Typography 
+  Typography,
+  Stack
 } from "@mui/material"
 
 
@@ -46,13 +47,18 @@ const DistanceDialog: React.FunctionComponent<DistanceDialogProps> = (props) => 
       <Dialog
         open={props.open}
         onClose={handleClose}
+        fullWidth={true}
       >
         <DialogTitle>Running Milestones</DialogTitle>
         <DialogContent>
           <LinearProgressWithLabel value={(props.distance / milestones['London to Paris'] * 100)} />
-          {props.distance}
-          {" - "}
-          {milestones['London to Paris']}
+          
+          <Stack direction="row" spacing ={1}>
+            
+            <Typography variant="body1" >London to Paris</Typography>
+            <Typography variant="body1">{`${props.distance} - ${milestones['London to Paris']}`}</Typography>
+            
+          </Stack>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
