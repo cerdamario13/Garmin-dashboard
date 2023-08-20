@@ -12,6 +12,7 @@ import {
   Typography,
   Stack
 } from "@mui/material"
+import Milestone from "../ProgressIndicators/LinearProgress"
 
 
 export interface DistanceDialogProps  {
