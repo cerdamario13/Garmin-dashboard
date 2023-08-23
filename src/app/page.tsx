@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 // import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { Button, Grid, Typography } from '@mui/material';
-import AllRunsList from './components/AllRunsList';
+import AllRunsList from './components/DataTables/AllRunsList';
 import Summaries from './components/Summaries';
 
 
@@ -23,6 +23,12 @@ export default function Home() {
           <Item>
             <AllRunsList />
           </Item>
+        </Grid>
+        <Grid item xs={4}>
+          
+        </Grid>
+        <Grid item xs={8}>
+          
         </Grid>
       </Grid>
     </>
