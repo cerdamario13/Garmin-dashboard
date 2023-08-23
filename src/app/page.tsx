@@ -4,7 +4,7 @@
 import Paper from '@mui/material/Paper';
 // import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import { Button, Grid, Typography } from '@mui/material';
+import {  Grid } from '@mui/material';
 import AllRunsList from './components/DataTables/AllRunsList';
 import Summaries from './components/Summaries';
 import AllRidesList from './components/DataTables/AllRidesList';
@@ -29,7 +29,9 @@ export default function Home() {
           
         </Grid>
         <Grid item xs={8}>
-          <AllRidesList />
+          <Item>
+            <AllRidesList />
+          </Item>
         </Grid>
       </Grid>
     </>
