@@ -39,8 +39,7 @@ const AllRunsList = () => {
         <TableCell>{item['Date']}</TableCell>
       </TableRow>
     )
-
-  })
+  });
   
   return (
     <>
