@@ -8,6 +8,7 @@ import {  Grid } from '@mui/material';
 import AllRunsList from './components/DataTables/AllRunsList';
 import Summaries from './components/Summaries';
 import AllRidesList from './components/DataTables/AllRidesList';
+import AllSwimsList from './components/DataTables/AllSwimsList';
 
 
 export default function Home() {
@@ -33,6 +34,17 @@ export default function Home() {
             <AllRidesList />
           </Item>
         </Grid>
+        
+        <Grid item xs={4}>
+          
+        </Grid>
+        <Grid item xs={8}>
+          <Item>
+            <AllSwimsList />
+          </Item>
+        </Grid>
+          
+        
       </Grid>
     </>
   )
