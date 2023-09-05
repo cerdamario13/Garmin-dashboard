@@ -22,9 +22,10 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
   
   //get the data from api
   const getAllActivities =async () => {
-    const url = new URL(`http://127.0.0.1:5000/${props.urlExtension}`);
+    const url = new URL("http://127.0.0.1:5000/allRuns");
     const response = await fetch(url.toString());
     const data = await response.json();
+    console.log(data);
     setAllActivities(data['data']);
   };
   
@@ -62,7 +63,7 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
           </TableHead>
           
           <TableBody>
-            {allActivities}
+            {activitiesList}
           </TableBody>
           
         </Table>

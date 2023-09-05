@@ -5,11 +5,10 @@ import Paper from '@mui/material/Paper';
 // import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import {  Grid } from '@mui/material';
-import AllRunsList from './components/DataTables/AllRunsList';
 import Summaries from './components/Summaries';
 import AllRidesList from './components/DataTables/AllRidesList';
 import AllSwimsList from './components/DataTables/AllSwimsList';
-
+import ActivitiesDataTable from './components/DataTables/ActivitiesDataTable';
 
 export default function Home() {
     
@@ -23,7 +22,9 @@ export default function Home() {
         </Grid>
         <Grid item xs={8}>
           <Item>
-            <AllRunsList />
+            <ActivitiesDataTable
+              urlExtension='allRuns'
+            />
           </Item>
         </Grid>
         <Grid item xs={4}>
