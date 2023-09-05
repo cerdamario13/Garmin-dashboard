@@ -13,7 +13,8 @@ import { Button,
 } from "@mui/material";
 
 interface activitiesDataTableProps {
-  urlExtension: string
+  tableData: string;
+  urlExtension: string;
 }
 
 const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (props) => {
@@ -48,7 +49,7 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
   return (
     <>
       <Stack direction="row" spacing={3}>
-        <Typography variant="h4">All Rides</Typography>
+        <Typography variant="h4">{props.tableData}</Typography>
         <Button variant="outlined" onClick={() => {getAllActivities()}}>Get Data</Button>
       </Stack> 
       

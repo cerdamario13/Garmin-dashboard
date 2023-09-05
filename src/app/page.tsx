@@ -21,6 +21,7 @@ export default function Home() {
         <Grid item xs={8}>
           <Item>
             <ActivitiesDataTable
+              tableData='Runs'
               urlExtension='allRuns'
             />
           </Item>
@@ -30,8 +31,8 @@ export default function Home() {
         </Grid>
         <Grid item xs={8}>
           <Item>
-            {/* <AllRidesList /> */}
             <ActivitiesDataTable
+              tableData='Rides'
               urlExtension='allRides'
             />
           </Item>
@@ -42,8 +43,8 @@ export default function Home() {
         </Grid>
         <Grid item xs={8}>
           <Item>
-            {/* <AllSwimsList /> */}
             <ActivitiesDataTable
+              tableData='Swims'
               urlExtension='allSwims'
             />
           </Item>
