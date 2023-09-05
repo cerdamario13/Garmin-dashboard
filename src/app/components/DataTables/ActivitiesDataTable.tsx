@@ -22,7 +22,7 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
   
   //get the data from api
   const getAllActivities =async () => {
-    const url = new URL("http://127.0.0.1:5000/allRuns");
+    const url = new URL(`http://127.0.0.1:5000/${props.urlExtension}`);
     const response = await fetch(url.toString());
     const data = await response.json();
     console.log(data);

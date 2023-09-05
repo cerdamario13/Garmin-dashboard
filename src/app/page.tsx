@@ -6,8 +6,6 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import {  Grid } from '@mui/material';
 import Summaries from './components/Summaries';
-import AllRidesList from './components/DataTables/AllRidesList';
-import AllSwimsList from './components/DataTables/AllSwimsList';
 import ActivitiesDataTable from './components/DataTables/ActivitiesDataTable';
 
 export default function Home() {
@@ -32,7 +30,10 @@ export default function Home() {
         </Grid>
         <Grid item xs={8}>
           <Item>
-            <AllRidesList />
+            {/* <AllRidesList /> */}
+            <ActivitiesDataTable
+              urlExtension='allRides'
+            />
           </Item>
         </Grid>
         
@@ -41,7 +42,10 @@ export default function Home() {
         </Grid>
         <Grid item xs={8}>
           <Item>
-            <AllSwimsList />
+            {/* <AllSwimsList /> */}
+            <ActivitiesDataTable
+              urlExtension='allSwims'
+            />
           </Item>
         </Grid>
           
