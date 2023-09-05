@@ -17,7 +17,7 @@ const AllSwimsList = ()=> {
   
   //get data from python flask
   const getAllRides = async () => {
-    const url = new URL("http://127.0.0.1:5000/allRides");
+    const url = new URL("http://127.0.0.1:5000/allSwims");
     const response = await fetch(url.toString());
     const data = await response.json();
     console.log(data);
@@ -51,7 +51,7 @@ const AllSwimsList = ()=> {
         <Table  size="small" aria-label="All Runs Table" style={{ width: '100%' }} >
           <TableHead>
             <TableRow>
-              <TableCell>Distance</TableCell>
+              <TableCell>Distance(m)</TableCell>
               <TableCell>Time</TableCell>
               <TableCell>Date</TableCell>
             </TableRow>
