@@ -12,6 +12,7 @@ import {
  import { DirectionsRun, Whatshot, DirectionsBike, Pool } from "@mui/icons-material";
 import { useState } from 'react';
 import DistanceDialog from './Dialogs/DistanceDialog';
+import SwimDialog from './Dialogs/SwimingDialog';
 
 
 const Summaries = () => {
@@ -30,6 +31,7 @@ const Summaries = () => {
   
   const [openDistanceDialog, setDistanceDialog] = useState(false);
   const [distanceView, setDistanceView] = useState(0);
+  const [openSwimDialog, setSwimDialog] = useState(false);
   
   
   const getRunSummary = async () => {
@@ -46,7 +48,12 @@ const Summaries = () => {
   
   const setMilestineDistance = (distanceType: string) => {
     // Set dialog open to true
-    setDistanceDialog(true);
+    if (distanceType === 'swim') {
+      setSwimDialog(true)
+    } else {
+      setDistanceDialog(true);  
+    }
+    
     // Set the viewDistance to the corresponding distance using switch statement
     switch (distanceType) {
       case 'run':
@@ -106,7 +113,7 @@ const Summaries = () => {
             <ListItemText primary={`Bike Calories: ${bikeSummary['total_calories']} Cal`} />
           </ListItemButton>
           
-          <ListItemButton>
+          <ListItemButton onClick={() => {setMilestineDistance('swim')}}>
             <ListItemIcon>
               <Pool />
             </ListItemIcon>
@@ -127,6 +134,12 @@ const Summaries = () => {
       <DistanceDialog
         open={openDistanceDialog}
         setOpen={setDistanceDialog}
+        distance={distanceView}
+      />
+      
+      <SwimDialog
+        open={openSwimDialog}
+        setOpen={setSwimDialog}
         distance={distanceView}
       />
       
