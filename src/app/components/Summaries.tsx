@@ -29,6 +29,7 @@ const Summaries = () => {
   })
   
   const [openDistanceDialog, setDistanceDialog] = useState(false);
+  const [distanceView, setDistanceView] = useState(0);
   
   
   const getRunSummary = async () => {
@@ -41,6 +42,26 @@ const Summaries = () => {
     setRunSummary(tempData['runs']);
     setBikeSummary(tempData['bike_rides']);
     setSwimSummary(tempData['swims']);
+  }
+  
+  const setMilestineDistance = (distanceType: string) => {
+    // Set dialog open to true
+    setDistanceDialog(true);
+    // Set the viewDistance to the corresponding distance using switch statement
+    switch (distanceType) {
+      case 'run':
+        setDistanceView(runSummary['total_distance']);
+        break;
+      case 'bike':
+        setDistanceView(bikeSummary['total_distance']);
+        break;
+      case 'swim':
+        setDistanceView(swimSummary['total_distance']);
+        break;
+      default:
+        setDistanceView(0);
+        break;
+    }
   }
   
   
@@ -57,7 +78,7 @@ const Summaries = () => {
         
         <List>
           
-          <ListItemButton onClick={() => {setDistanceDialog(true)}}>
+          <ListItemButton onClick={() => {setMilestineDistance('run')}}>
             <ListItemIcon>
               <DirectionsRun />
             </ListItemIcon>
@@ -71,7 +92,7 @@ const Summaries = () => {
             <ListItemText primary={`Run Calories ${runSummary['total_calories']} Cal`} />
           </ListItemButton>
           
-          <ListItemButton>
+          <ListItemButton onClick={() => {setMilestineDistance('bike')}}>
             <ListItemIcon>
               <DirectionsBike />
             </ListItemIcon>
@@ -106,7 +127,7 @@ const Summaries = () => {
       <DistanceDialog
         open={openDistanceDialog}
         setOpen={setDistanceDialog}
-        distance={runSummary['total_distance']}
+        distance={distanceView}
       />
       
     </>
