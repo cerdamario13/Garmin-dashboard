@@ -83,51 +83,64 @@ const Summaries = () => {
           <Button variant="outlined" onClick={() => {getRunSummary()}}>Get Summary</Button>
         </Stack>
         
-        <List>
-          
-          <ListItemButton onClick={() => {setMilestineDistance('run')}}>
-            <ListItemIcon>
-              <DirectionsRun />
-            </ListItemIcon>
-            <ListItemText primary={`Run Distance: ${runSummary['total_distance']} Miles`} />
-          </ListItemButton>
-          
-          <ListItemButton >
-            <ListItemIcon>
-              <Whatshot />
-            </ListItemIcon>
-            <ListItemText primary={`Run Calories ${runSummary['total_calories']} Cal`} />
-          </ListItemButton>
-          
-          <ListItemButton onClick={() => {setMilestineDistance('bike')}}>
-            <ListItemIcon>
-              <DirectionsBike />
-            </ListItemIcon>
-            <ListItemText primary={`Bike Distance: ${bikeSummary['total_distance']} Miles`}/>
-          </ListItemButton>
-          
-          <ListItemButton >
-            <ListItemIcon>
-              <Whatshot />
-            </ListItemIcon>
-            <ListItemText primary={`Bike Calories: ${bikeSummary['total_calories']} Cal`} />
-          </ListItemButton>
-          
-          <ListItemButton onClick={() => {setMilestineDistance('swim')}}>
-            <ListItemIcon>
-              <Pool />
-            </ListItemIcon>
-            <ListItemText primary={`Swim Distance: ${swimSummary['total_distance']} Meters`}/>
-          </ListItemButton>
-          
-          <ListItemButton >
-            <ListItemIcon>
-              <Whatshot />
-            </ListItemIcon>
-            <ListItemText primary={`Swim Calories: ${swimSummary['total_calories']}  Cal`} />
-          </ListItemButton>
-          
-        </List>
+        <Stack direction="row">
+            <>
+                <List style={{width: '50%'}}>
+                
+                <ListItemButton onClick={() => {setMilestineDistance('run')}}>
+                    <ListItemIcon>
+                    <DirectionsRun />
+                    </ListItemIcon>
+                    <ListItemText primary={`Run Distance: ${runSummary['total_distance']} Miles`} />
+                </ListItemButton>
+                
+                <ListItemButton >
+                    <ListItemIcon>
+                    <Whatshot />
+                    </ListItemIcon>
+                    <ListItemText primary={`Run Calories ${runSummary['total_calories']} Cal`} />
+                </ListItemButton>
+                
+                <ListItemButton onClick={() => {setMilestineDistance('bike')}}>
+                    <ListItemIcon>
+                    <DirectionsBike />
+                    </ListItemIcon>
+                    <ListItemText primary={`Bike Distance: ${bikeSummary['total_distance']} Miles`}/>
+                </ListItemButton>
+                
+                <ListItemButton >
+                    <ListItemIcon>
+                    <Whatshot />
+                    </ListItemIcon>
+                    <ListItemText primary={`Bike Calories: ${bikeSummary['total_calories']} Cal`} />
+                </ListItemButton>
+                
+                <ListItemButton onClick={() => {setMilestineDistance('swim')}}>
+                    <ListItemIcon>
+                    <Pool />
+                    </ListItemIcon>
+                    <ListItemText primary={`Swim Distance: ${swimSummary['total_distance']} Meters`}/>
+                </ListItemButton>
+                
+                <ListItemButton >
+                    <ListItemIcon>
+                    <Whatshot />
+                    </ListItemIcon>
+                    <ListItemText primary={`Swim Calories: ${swimSummary['total_calories']}  Cal`} />
+                </ListItemButton>
+                
+                </List>            
+            </>
+            
+            <>
+                Hello
+            </>
+
+            
+            
+            
+        </Stack>
+        
         
       </Stack>
       
