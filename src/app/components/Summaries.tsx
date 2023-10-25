@@ -7,7 +7,8 @@ import {
   ListItemButton,
   ListItemText,
   ListItemIcon,
-  ListItem
+  ListItem,
+  Alert
  } from '@mui/material'
  import { DirectionsRun, Whatshot, DirectionsBike, Pool } from "@mui/icons-material";
 import { useState } from 'react';
@@ -27,7 +28,11 @@ const Summaries = () => {
   const [swimSummary, setSwimSummary] = useState({
     total_distance: 0,
     total_calories: 0
-  })
+  });
+  
+  // Error handling
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   
   const [openDistanceDialog, setDistanceDialog] = useState(false);
   const [distanceView, setDistanceView] = useState(0);
@@ -35,15 +40,33 @@ const Summaries = () => {
   
   
   const getRunSummary = async () => {
-    const url = new URL("http://127.0.0.1:5000/runSummaries");
-    const response = await fetch(url.toString());
-    const data = await response.json();
-    console.log(data);
     
-    const tempData = {...data};
-    setRunSummary(tempData['runs']);
-    setBikeSummary(tempData['bike_rides']);
-    setSwimSummary(tempData['swims']);
+    //clear error
+    setError(false);
+    setErrorMessage('');
+    
+    const url = new URL("http://127.0.0.1:5000/runSummaries");
+    
+    try {
+      const response = await fetch(url.toString());
+      
+      if (!response.ok) {
+        setError(true);
+        setErrorMessage('Failed to get Workout Stats');
+        return;
+      }
+      
+      const data = await response.json();
+      
+      const tempData = {...data};
+      setRunSummary(tempData['runs']);
+      setBikeSummary(tempData['bike_rides']);
+      setSwimSummary(tempData['swims']);
+    } catch (e) {
+      setError(true);
+      setErrorMessage('Failed to get Workout Stats');
+      console.log(e);
+    }
   }
   
   const setMilestineDistance = (distanceType: string) => {
@@ -77,9 +100,12 @@ const Summaries = () => {
     
     <>
       <Stack direction="column">
-        
         <Stack direction="row" spacing={3}>
-          <Typography variant='h4'>Workout Stats</Typography>
+          {
+            error ? (<Alert severity="error">{errorMessage}</Alert>)
+            :
+            (<Typography variant='h4'>Workout Stats</Typography>)
+          }
           <Button variant="outlined" onClick={() => {getRunSummary()}}>Get Summary</Button>
         </Stack>
         
