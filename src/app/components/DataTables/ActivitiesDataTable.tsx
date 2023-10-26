@@ -10,6 +10,7 @@ import { Button,
   Table,
   TableHead,
   TableBody,
+  Alert,
 } from "@mui/material";
 
 interface activitiesDataTableProps {
@@ -20,14 +21,35 @@ interface activitiesDataTableProps {
 const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (props) => {
   
   const [allActivities, setAllActivities] = useState([]);
+  //Error handling
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   
   //get the data from api
   const getAllActivities =async () => {
+    
+    //clear error
+    setError(false);
+    setErrorMessage("");
+    
     const url = new URL(`http://127.0.0.1:5000/${props.urlExtension}`);
-    const response = await fetch(url.toString());
-    const data = await response.json();
-    console.log(data);
-    setAllActivities(data['data']);
+    
+    try {
+        const response = await fetch(url.toString());
+        
+        if (!response.ok) {
+            setError(true);
+            setErrorMessage(`Failed to get ${props.tableData}`);
+            return;
+        }
+        
+        const data = await response.json();
+        console.log(data);
+        setAllActivities(data['data']);
+    } catch (e) {
+        setError(true);
+        setErrorMessage(`Failed to get ${props.tableData}`);   
+    }
   };
   
     //mapping all rides
@@ -49,7 +71,11 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
   return (
     <>
       <Stack direction="row" spacing={3}>
-        <Typography variant="h4">{props.tableData}</Typography>
+        {
+          error ? (<Alert severity="error">{errorMessage}</Alert>)
+          :
+          (<Typography variant="h4">{props.tableData}</Typography>)
+        }
         <Button variant="outlined" onClick={() => {getAllActivities()}}>Get Data</Button>
       </Stack> 
       

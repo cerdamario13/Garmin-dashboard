@@ -65,7 +65,6 @@ const Summaries = () => {
     } catch (e) {
       setError(true);
       setErrorMessage('Failed to get Workout Stats');
-      console.log(e);
     }
   }
   
