@@ -12,9 +12,19 @@ import {
  } from '@mui/material'
 import { DirectionsRun, Whatshot, DirectionsBike, Pool } from "@mui/icons-material";
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DistanceDialog from './Dialogs/DistanceDialog';
 import SwimDialog from './Dialogs/SwimingDialog';
+
+export const useIsServerSide = () => {
+  const [isServerSide, setIsServerSide] = useState(true);
+  
+  useEffect(() => {
+    setIsServerSide(false);
+  }, [setIsServerSide]);
+  
+  return isServerSide;
+}
 
 
 const Summaries = () => {
@@ -41,6 +51,7 @@ const Summaries = () => {
       distance: 0,
     }
   ]); // [{name: 'Run', distance: 0}, {name: 'Bike', distance: 0}
+  
   
   // Error handling
   const [error, setError] = useState(false);
@@ -122,6 +133,33 @@ const Summaries = () => {
     }
   }
   
+  const barChart = () => {
+    const isServerSide = useIsServerSide();
+    if (isServerSide) {
+      return null;
+    }
+    
+    return (
+      <BarChart
+        width={500}
+        height={300}
+        data={summariesChartData}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="distance" fill="#8884d8" />
+      </BarChart>
+    )
+  }
   
   return (
     
@@ -186,28 +224,8 @@ const Summaries = () => {
             </>
             
             <>
-              <BarChart
-                width={500}
-                height={300}
-                data={summariesChartData}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="distance" fill="#8884d8" />
-              </BarChart>
+              {barChart()}
             </>
-
-            
-            
             
         </Stack>
         
