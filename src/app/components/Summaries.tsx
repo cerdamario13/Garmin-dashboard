@@ -10,7 +10,8 @@ import {
   ListItem,
   Alert
  } from '@mui/material'
- import { DirectionsRun, Whatshot, DirectionsBike, Pool } from "@mui/icons-material";
+import { DirectionsRun, Whatshot, DirectionsBike, Pool } from "@mui/icons-material";
+import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { useState } from 'react';
 import DistanceDialog from './Dialogs/DistanceDialog';
 import SwimDialog from './Dialogs/SwimingDialog';
@@ -29,6 +30,17 @@ const Summaries = () => {
     total_distance: 0,
     total_calories: 0
   });
+  
+  const [summariesChartData, setSummariesChartData] = useState([
+    {
+      name: 'Run',
+      distance: 0,
+    },
+    {
+      name: 'Bike',
+      distance: 0,
+    }
+  ]); // [{name: 'Run', distance: 0}, {name: 'Bike', distance: 0}
   
   // Error handling
   const [error, setError] = useState(false);
@@ -62,6 +74,23 @@ const Summaries = () => {
       setRunSummary(tempData['runs']);
       setBikeSummary(tempData['bike_rides']);
       setSwimSummary(tempData['swims']);
+      
+      
+      // get the data ready for recharts
+      const summariesChart = [
+        {
+          name: 'Run',
+          distance: tempData['runs']['total_distance'],
+        },
+        {
+          name: 'Bike',
+          distance: tempData['bike_rides']['total_distance'],
+        }
+      ]
+      
+      setSummariesChartData(summariesChart);
+      
+      
     } catch (e) {
       setError(true);
       setErrorMessage('Failed to get Workout Stats');
@@ -92,7 +121,6 @@ const Summaries = () => {
         break;
     }
   }
-  
   
   
   return (
@@ -158,7 +186,24 @@ const Summaries = () => {
             </>
             
             <>
-                Hello
+              <BarChart
+                width={500}
+                height={300}
+                data={summariesChartData}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="distance" fill="#8884d8" />
+              </BarChart>
             </>
 
             
