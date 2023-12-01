@@ -18,7 +18,7 @@ export default function Home() {
             <Summaries />
           </Item>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={4} md={12}>
           <Item>
             <ActivitiesDataTable
               tableData='Runs'
@@ -29,7 +29,7 @@ export default function Home() {
         <Grid item xs={4}>
           
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={4} md={12}>
           <Item>
             <ActivitiesDataTable
               tableData='Rides'
@@ -41,7 +41,7 @@ export default function Home() {
         <Grid item xs={4}>
           
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={4} md={12}>
           <Item>
             <ActivitiesDataTable
               tableData='Swims'

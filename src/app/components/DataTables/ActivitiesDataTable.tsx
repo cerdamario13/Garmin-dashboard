@@ -12,6 +12,8 @@ import { Button,
   TableBody,
   Alert,
 } from "@mui/material";
+import { useIsServerSide } from "../Summaries";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 interface activitiesDataTableProps {
   tableData: string;
@@ -24,6 +26,13 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
   //Error handling
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  
+  const [chartData, setChartData] = useState([
+    {
+      name: 'Run',
+      distance: 0
+    }
+  ]);
   
   //get the data from api
   const getAllActivities =async () => {
@@ -52,49 +61,90 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
     }
   };
   
-    //mapping all rides
-    const activitiesList = allActivities.map((item, _) => {
-      return(
-        <TableRow
-          key={item['Date']}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            {item['Distance']}
-          </TableCell>
-          <TableCell>{item['Elapsed Time']}</TableCell>
-          <TableCell>{item['Date']}</TableCell>
-        </TableRow>
-      )
-    });
+  //mapping all rides
+  const activitiesList = allActivities.map((item, _) => {
+    return(
+      <TableRow
+        key={item['Date']}
+        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+      >
+        <TableCell component="th" scope="row">
+          {item['Distance']}
+        </TableCell>
+        <TableCell>{item['Elapsed Time']}</TableCell>
+        <TableCell>{item['Date']}</TableCell>
+      </TableRow>
+    )
+  });
+  
+  const barChart = () => {
+    const isServerSide = useIsServerSide();
+    if (isServerSide) { return null };
+    
+    return (
+      <BarChart
+        width={500}
+        height={300}
+        data={chartData}
+        margin={{
+          top: 5, right: 30, left: 20, bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="distance" fill="#8884d8" />  
+      </BarChart>
+    )
+    
+  };
+
+    
   
   return (
     <>
-      <Stack direction="row" spacing={3}>
-        {
-          error ? (<Alert severity="error">{errorMessage}</Alert>)
-          :
-          (<Typography variant="h4">{props.tableData}</Typography>)
-        }
-        <Button variant="outlined" onClick={() => {getAllActivities()}}>Get Data</Button>
-      </Stack> 
+      <Stack direction="column">
+        
+        <Stack direction="row" spacing={3}>
+          {
+            error ? (<Alert severity="error">{errorMessage}</Alert>)
+            :
+            (<Typography variant="h4">{props.tableData}</Typography>)
+          }
+          <Button variant="outlined" onClick={() => {getAllActivities()}}>Get Data</Button>
+        </Stack>
+        
+        <Stack direction="row">
+          <>
+          <TableContainer style={{ maxHeight: 350 }}>
+            <Table  size="small" aria-label="All Runs Table" style={{ width: '100%' }} >
+              <TableHead>
+                <TableRow>
+                  <TableCell>Distance</TableCell>
+                  <TableCell>Time</TableCell>
+                  <TableCell>Date</TableCell>
+                </TableRow>
+              </TableHead>
+              
+              <TableBody>
+                {activitiesList}
+              </TableBody>
+              
+            </Table>
+          </TableContainer>
+          </>
+          
+          <>
+            {barChart()}
+          </>
+        </Stack>      
+        
+      </Stack>
       
-      <TableContainer style={{ maxHeight: 350 }}>
-        <Table  size="small" aria-label="All Runs Table" style={{ width: '100%' }} >
-          <TableHead>
-            <TableRow>
-              <TableCell>Distance</TableCell>
-              <TableCell>Time</TableCell>
-              <TableCell>Date</TableCell>
-            </TableRow>
-          </TableHead>
-          
-          <TableBody>
-            {activitiesList}
-          </TableBody>
-          
-        </Table>
-      </TableContainer>
+      
+      
     </>
   )
 
