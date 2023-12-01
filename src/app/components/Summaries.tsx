@@ -14,7 +14,7 @@ import { DirectionsRun, Whatshot, DirectionsBike, Pool } from "@mui/icons-materi
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { useEffect, useState } from 'react';
 import DistanceDialog from './Dialogs/DistanceDialog';
-import SwimDialog from './Dialogs/SwimingDialog';
+import SwimDialog from './Dialogs/SwimmingDialog';
 
 export const useIsServerSide = () => {
   const [isServerSide, setIsServerSide] = useState(true);
