@@ -13,7 +13,7 @@ import { Button,
   Alert,
 } from "@mui/material";
 import { useIsServerSide } from "../Summaries";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line } from "recharts";
 
 interface activitiesDataTableProps {
   tableData: string;
@@ -55,6 +55,16 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
         const data = await response.json();
         console.log(data);
         setAllActivities(data['data']);
+        
+        const tempChartData = data['data'].map((x: any) => {
+          return {
+            Distance: Number(x['Distance']),
+            Date: x['Date']
+          }
+        }); 
+        console.log(tempChartData);
+        setChartData(tempChartData);
+              
     } catch (e) {
         setError(true);
         setErrorMessage(`Failed to get ${props.tableData}`);   
@@ -82,23 +92,23 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
     if (isServerSide) { return null };
     
     return (
-      <BarChart
+    
+      <LineChart
         width={500}
         height={300}
         data={chartData}
         margin={{
-          top: 5, right: 30, left: 20, bottom: 5,
+            top: 5, right: 30, left: 20, bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <CartesianGrid strokeDasharray="3 3"/>
+        <XAxis dataKey="Date"/>
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="distance" fill="#8884d8" />  
-      </BarChart>
+        <Line type="monotone" dataKey="Distance" stroke="#8884d8" activeDot={{ r: 8 }}/>
+      </LineChart>
     )
-    
   };
 
     
