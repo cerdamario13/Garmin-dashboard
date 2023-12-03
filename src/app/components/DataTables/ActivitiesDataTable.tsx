@@ -13,7 +13,7 @@ import { Button,
   Alert,
 } from "@mui/material";
 import { useIsServerSide } from "../Summaries";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line } from "recharts";
+import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line } from "recharts";
 
 interface activitiesDataTableProps {
   tableData: string;
@@ -62,7 +62,6 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
             Date: x['Date']
           }
         }); 
-        console.log(tempChartData);
         setChartData(tempChartData);
               
     } catch (e) {
@@ -87,6 +86,29 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
     )
   });
   
+  const formatCustomDate = (date: Date) => {
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${month}-${day}`;
+  };
+  
+  interface TickProps {
+    x: number;
+    y: number;
+    payload: any;
+  }
+  
+  const CustomXAxisTick = ({ x, y, payload }: TickProps) => {
+    const formattedDate = formatCustomDate(new Date(payload.value));
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-45)">
+          {formattedDate}
+        </text>
+      </g>
+    );
+  };
+  
   const barChart = () => {
     const isServerSide = useIsServerSide();
     if (isServerSide) { return null };
@@ -102,7 +124,7 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
         }}
       >
         <CartesianGrid strokeDasharray="3 3"/>
-        <XAxis dataKey="Date"/>
+        <XAxis dataKey="Date" tick={<CustomXAxisTick />}/>
         <YAxis />
         <Tooltip />
         <Legend />
