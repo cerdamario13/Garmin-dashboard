@@ -27,12 +27,7 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   
-  const [chartData, setChartData] = useState([
-    {
-      name: 'Run',
-      distance: 0
-    }
-  ]);
+  const [chartData, setChartData] = useState([{}]);
   
   //get the data from api
   const getAllActivities =async () => {
@@ -53,7 +48,6 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
         }
         
         const data = await response.json();
-        console.log(data);
         setAllActivities(data['data']);
         
         const tempChartData = data['data'].map((x: any) => {
@@ -108,7 +102,6 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
       </g>
     );
   };
-  
   const barChart = () => {
     const isServerSide = useIsServerSide();
     if (isServerSide) { return null };
@@ -124,7 +117,12 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
         }}
       >
         <CartesianGrid strokeDasharray="3 3"/>
-        <XAxis dataKey="Date" tick={<CustomXAxisTick />}/>
+        <XAxis
+          dataKey="Date"
+          tick={
+            Object.keys(chartData[0]).length > 0 ? <CustomXAxisTick x={0} y={0} payload={undefined} /> : <></>
+          }
+        />
         <YAxis />
         <Tooltip />
         <Legend />
