@@ -176,7 +176,7 @@ const Summaries = () => {
         
         <Stack direction="row">
             <>
-                <List style={{width: '50%'}}>
+                <List style={{width: '100%'}}>
                 
                 <ListItemButton onClick={() => {setMilestineDistance('run')}}>
                     <ListItemIcon>
