@@ -5,10 +5,10 @@ import Paper from '@mui/material/Paper';
 // import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import {  Grid } from '@mui/material';
-import Summaries from './components/Summaries';
-import ActivitiesDataTable from './components/DataTables/ActivitiesDataTable';
+import Summaries from './Summaries';
+import ActivitiesDataTable from './DataTables/ActivitiesDataTable';
 
-export default function Home() {
+export default function WorkoutsHome() {
     
   return (
     <>

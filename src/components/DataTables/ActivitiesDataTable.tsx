@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState } from "react";
 import { Button,
   Stack,
@@ -12,7 +10,6 @@ import { Button,
   TableBody,
   Alert,
 } from "@mui/material";
-import { useIsServerSide } from "../Summaries";
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line } from "recharts";
 
 interface activitiesDataTableProps {
@@ -102,10 +99,7 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
       </g>
     );
   };
-  const barChart = () => {
-    const isServerSide = useIsServerSide();
-    if (isServerSide) { return null };
-    
+  const barChart = () => {    
     return (
     
       <LineChart

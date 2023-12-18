@@ -16,17 +16,6 @@ import { useEffect, useState } from 'react';
 import DistanceDialog from './Dialogs/DistanceDialog';
 import SwimDialog from './Dialogs/SwimmingDialog';
 
-export const useIsServerSide = () => {
-  const [isServerSide, setIsServerSide] = useState(true);
-  
-  useEffect(() => {
-    setIsServerSide(false);
-  }, [setIsServerSide]);
-  
-  return isServerSide;
-}
-
-
 const Summaries = () => {
   const [runSummary, setRunSummary] = useState({
     "total_distance": 0,
@@ -134,11 +123,6 @@ const Summaries = () => {
   }
   
   const barChart = () => {
-    const isServerSide = useIsServerSide();
-    if (isServerSide) {
-      return null;
-    }
-    
     return (
       <BarChart
         width={500}
