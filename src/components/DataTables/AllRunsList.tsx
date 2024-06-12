@@ -17,7 +17,7 @@ const AllRunsList = () => {
   
   //getting data from localHost Python flask
   const getAllRuns = async () => {
-    const url = new URL("http://127.0.0.1:5000/allRuns");
+    const url = new URL("https://127.0.0.1:8000/allRuns");
     
     const response = await fetch(url.toString());
     const data = await response.json();

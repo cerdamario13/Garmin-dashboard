@@ -57,7 +57,7 @@ const Summaries = () => {
     setError(false);
     setErrorMessage('');
     
-    const url = new URL("http://127.0.0.1:5000/runSummaries");
+    const url = new URL("https://127.0.0.1:8000/runSummaries");
     
     try {
       const response = await fetch(url.toString());

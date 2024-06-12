@@ -33,7 +33,7 @@ const ActivitiesDataTable: React.FunctionComponent<activitiesDataTableProps> = (
     setError(false);
     setErrorMessage("");
     
-    const url = new URL(`http://127.0.0.1:5000/${props.urlExtension}`);
+    const url = new URL(`https://127.0.0.1:8000/${props.urlExtension}`);
     
     try {
         const response = await fetch(url.toString());

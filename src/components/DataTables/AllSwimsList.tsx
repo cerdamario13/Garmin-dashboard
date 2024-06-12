@@ -17,7 +17,7 @@ const AllSwimsList = ()=> {
   
   //get data from python flask
   const getAllRides = async () => {
-    const url = new URL("http://127.0.0.1:5000/allSwims");
+    const url = new URL("https://127.0.0.1:8000/allSwims");
     const response = await fetch(url.toString());
     const data = await response.json();
     console.log(data);
