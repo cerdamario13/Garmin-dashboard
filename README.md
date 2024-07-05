@@ -1,4 +1,24 @@
-# Getting Started with Create React App
+# Garmin Connector
+
+First dashboard React project. To be used with conjunction with [Garmin Connector](https://github.com/cerdamario13/garmin-connector).
+This dashboard shows the summary of different activities.
+
+### All Activities Summary
+![](img/workout_summary.png)
+
+### Runs Summary
+![](img/runs_summary.png)
+
+### Rides Summary
+![](img/rides_summary.png)
+
+### Swims Summary
+![](img/swims_summary.png)
+
+### Milestones
+![](img/Milestones.png)
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
